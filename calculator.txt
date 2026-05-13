@@ -1,0 +1,18 @@
+public class Calculator {
+
+    public static void calculate() {
+
+        Integer a = 10;
+        Integer b = 5;
+
+        Integer add = a + b;
+        Integer sub = a - b;
+        Integer mul = a * b;
+        Integer div = a / b;
+
+        System.debug('Addition = ' + add);
+        System.debug('Subtraction = ' + sub);
+        System.debug('Multiplication = ' + mul);
+        System.debug('Division = ' + div);
+    }
+}

@@ -1,0 +1,24 @@
+public class GradeCalculator {
+
+    public static void calculateGrade() {
+
+        Integer marks = 75;
+
+        if(marks >= 80) {
+
+            System.debug('Grade A');
+
+        } else if(marks >= 60) {
+
+            System.debug('Grade B');
+
+        } else if(marks >= 40) {
+
+            System.debug('Grade C');
+
+        } else {
+
+            System.debug('Fail');
+        }
+    }
+}

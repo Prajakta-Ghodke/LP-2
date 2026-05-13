@@ -1,0 +1,17 @@
+public class AccountCreation {
+
+    public static void createAccount() {
+
+        // Creating Account record
+        Account acc = new Account();
+
+        acc.Name = 'ABC Company';
+        acc.Phone = '9876543210';
+        acc.Website = 'www.abc.com';
+
+        // Inserting record into Salesforce
+        insert acc;
+
+        System.debug('Account Created Successfully');
+    }
+}
