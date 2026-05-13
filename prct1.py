@@ -19,26 +19,31 @@ def dfs(node):
         for neighbour in graph[node]:
             dfs(neighbour)
 
+queue = []
+visited_bsf = []
 # BFS without using import
-def bfs(start):
-    visited = []
-    queue = []
+def bfs():
+    if not queue:
+        return
+    
+    node = queue.pop(0)
+    print(node, end=' ')
+    
+    for neighbour in graph[node]:
+        if neighbour not in visited_bsf:
+            visited_bsf.append(neighbour)
+            queue.append(neighbour)
+    
+    bfs()
 
-    visited.append(start)
-    queue.append(start)
-
-    while queue:
-        node = queue.pop(0)
-        print(node, end=' ')
-
-        for neighbour in graph[node]:
-            if neighbour not in visited:
-                visited.append(neighbour)
-                queue.append(neighbour)
+start = 'A'
 
 # Main Program
 print("DFS Traversal:")
 dfs('A')
 
+visited_bsf.append(start)
+queue.append(start)
+
 print("\nBFS Traversal:")
-bfs('A')
+bfs()

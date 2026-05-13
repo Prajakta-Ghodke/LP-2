@@ -1,13 +1,10 @@
-# Map Coloring Problem
+# Graph Coloring Problem using CSP and Backtracking
 
-# List of states
-states = ['WA', 'NT', 'SA', 'Q', 'NSW', 'V', 'T']
-
-# Adjacency list
-neighbors = {
+# Graph representation
+graph = {
     'WA': ['NT', 'SA'],
     'NT': ['WA', 'SA', 'Q'],
-    'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
+    'SA': ['WA', 'NT', 'Q', 'NSW', 'V', 'T'],
     'Q': ['NT', 'SA', 'NSW'],
     'NSW': ['Q', 'SA', 'V'],
     'V': ['SA', 'NSW'],
@@ -17,30 +14,58 @@ neighbors = {
 # Available colors
 colors = ['Red', 'Green', 'Blue']
 
-# Dictionary to store result
-result = {}
 
-# Function to check whether color assignment is safe
-def is_safe(state, color):
+# Function to check whether color assignment is valid
+def is_valid(node, color, assignment):
 
-    for neighbour in neighbors[state]:
+    for neighbor in graph[node]:
 
-        if neighbour in result and result[neighbour] == color:
+        # Check constraint
+        if neighbor in assignment and assignment[neighbor] == color:
             return False
 
     return True
 
-# Assign colors to states
-for state in states:
 
-    for color in colors:
+# CSP using Backtracking
+def csp(assignment):
 
-        if is_safe(state, color):
-            result[state] = color
+    # If all nodes are assigned
+    if len(assignment) == len(graph):
+        return assignment
+
+    # Select unassigned node
+    for node in graph:
+        if node not in assignment:
             break
 
-# Display solution
-print("Map Coloring Solution:")
+    # Try all colors
+    for color in colors:
 
-for state in result:
-    print(state, '->', result[state])
+        # Check validity
+        if is_valid(node, color, assignment):
+
+            # Assign color
+            assignment[node] = color
+
+            # Recursive call
+            result = csp(assignment)
+
+            # If solution found
+            if result:
+                return result
+
+            # Backtracking step
+            del assignment[node]
+
+    return None
+
+
+# Start CSP
+solution = csp({})
+
+# Display output
+print("\nGraph Coloring Solution:\n")
+
+for state, color in solution.items():
+    print(state, "->", color)
